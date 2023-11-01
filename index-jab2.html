@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript Counter</title>
+</head>
+<body>
+  <div class="caja">
+    <button class="boton1">Start</button>
+  </div>
+
+  <script>
+    let contador = 1;
+    let initialState; // Variable para almacenar el estado inicial
+
+    document.querySelector(".boton1").addEventListener("click", empezar);
+
+    function empezar() {
+      initialState = document.querySelector(".caja").innerHTML; // Guarda el estado inicial
+
+      document.querySelector(".caja").innerHTML = `
+        <button class="boton2">Add 1</button>
+        <button class="boton3">Reset</button>
+        <button class="boton4">Return to Start</button>
+        <div class="contador">${contador}</div>`;
+
+      actualizar();
+
+      document.querySelector(".boton2").addEventListener("click", incrementar);
+      document.querySelector(".boton3").onclick = reiniciar;
+      document.querySelector(".boton4").onclick = volverAInicial;
+    }
+
+    function incrementar() {
+      ++contador;
+      actualizar();
+    }
+
+    function reiniciar() {
+      contador = 1;
+      actualizar();
+    }
+
+    function volverAInicial() {
+      document.querySelector(".caja").innerHTML = initialState; // Restaura el estado inicial
+      contador = 1;
+      document.querySelector(".boton1").addEventListener("click", empezar); // Vuelve a asignar el evento "Start"
+    }
+
+    function actualizar() {
+      document.querySelector(".contador").innerHTML = contador;
+    }
+  </script>
+</body>
+</html>
