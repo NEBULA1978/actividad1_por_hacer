@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contador de JavaScript</title>
+</head>
+<body>
+  <div class="caja">
+    <!-- Botón para comenzar / Button to start -->
+    <button class="boton1">Empezar</button>
+  </div>
+
+  <script>
+    // Variable para el contador, inicializada en 1 / Variable for the counter, initialized at 1
+    let contador = 1;
+
+    // Cuando se hace clic en el botón "Empezar", se llama a la función empezar / When "Empezar" button is clicked, it triggers the empezar function
+    document.querySelector(".boton1").addEventListener("click", empezar);
+
+    // Función que se ejecuta al hacer clic en el botón "Empezar" / Function executed when "Empezar" button is clicked
+    function empezar() {
+      // Reemplaza el contenido de la caja con nuevos elementos HTML para los botones y el contador / Replaces the content of the box with new HTML elements for buttons and the counter
+      document.querySelector(".caja").innerHTML = `
+        <button class="boton2">Añadir 1</button>
+        <button class="boton3">Reiniciar</button>
+        <div class="contador">${contador}</div>`;
+
+      // Actualiza el valor del contador en la página / Updates the counter value on the page
+      actualizar();
+
+      // Asigna eventos a los botones "Añadir 1" y "Reiniciar" / Assigns events to "Añadir 1" and "Reiniciar" buttons
+      document.querySelector(".boton2").addEventListener("click", incrementar);
+      document.querySelector(".boton3").onclick = reiniciar;
+    }
+
+    // Función para aumentar el contador al hacer clic en el botón "Añadir 1" / Function to increase the counter when "Añadir 1" button is clicked
+    function incrementar() {
+      // Incrementa el contador en 1 / Increases the counter by 1
+      ++contador;
+      // Actualiza el valor del contador en la página / Updates the counter value on the page
+      actualizar();
+    }
+
+    // Función para reiniciar el contador al hacer clic en el botón "Reiniciar" / Function to reset the counter when "Reiniciar" button is clicked
+    function reiniciar() {
+      // Reinicia el contador a 1 / Resets the counter to 1
+      contador = 1;
+      // Actualiza el valor del contador en la página / Updates the counter value on the page
+      actualizar();
+    }
+
+    // Función para actualizar el valor del contador en la página / Function to update the counter value on the page
+    function actualizar() {
+      // Actualiza el contenido del elemento con la clase "contador" con el valor del contador / Updates the content of the element with class "contador" with the counter value
+      document.querySelector(".contador").innerHTML = contador;
+    }
+  </script>
+</body>
+</html>
