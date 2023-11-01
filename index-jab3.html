@@ -12,86 +12,50 @@
 
   <script>
     let contador = 1;
-    let initialStates = [];
-    
-    // Crear la primera caja con sus botones
-    let caja1 = document.createElement("div");
-    caja1.classList.add("caja");
-    document.body.appendChild(caja1);
+    let initialState; // Variable para almacenar el estado inicial
 
     document.querySelector(".boton1").addEventListener("click", empezar);
 
     function empezar() {
-      if (initialStates.length < 3) {
-        let currentState = document.querySelector(".caja").innerHTML;
-        initialStates.push(currentState);
+      initialState = document.querySelector(".caja").innerHTML; // Guarda el estado inicial
 
-        iniciarContador();
-        createButtons(caja1);
-      } else {
-        alert("Ya se han creado los 3 conjuntos adicionales de botones.");
-      }
-    }
-
-    function iniciarContador() {
       document.querySelector(".caja").innerHTML = `
         <button class="boton2">Add 1</button>
         <button class="boton3">Reset</button>
         <button class="boton4">Return to Start</button>
+        <button class="boton5">Add 1</button>
+        <button class="boton6">Reset</button>
+        <button class="boton7">Return to Start</button>
         <div class="contador">${contador}</div>`;
 
-      asignarEventos();
+      actualizar();
+
+      document.querySelector(".boton2").addEventListener("click", incrementar);
+      document.querySelector(".boton3").addEventListener("click", reiniciar);
+      document.querySelector(".boton4").addEventListener("click", volverAInicial);
+      document.querySelector(".boton5").addEventListener("click", incrementar);
+      document.querySelector(".boton6").addEventListener("click", reiniciar);
+      document.querySelector(".boton7").addEventListener("click", volverAInicial);
     }
 
-    // Función para crear los botones en la caja proporcionada
-    function createButtons(caja) {
-      for (let i = 0; i < 3; i++) {
-        let addButton = document.createElement("button");
-        addButton.innerHTML = "Add 2";
-        addButton.addEventListener("click", function() {
-          contador += 2;
-          actualizar();
-        });
+    function incrementar() {
+      ++contador;
+      actualizar();
+    }
 
-        let resetButton = document.createElement("button");
-        resetButton.innerHTML = "Reset 2";
-        resetButton.addEventListener("click", function() {
-          contador = 1;
-          actualizar();
-        });
+    function reiniciar() {
+      contador = 1;
+      actualizar();
+    }
 
-        let returnButton = document.createElement("button");
-        returnButton.innerHTML = "Return to Start 2";
-        returnButton.addEventListener("click", function() {
-          caja.innerHTML = initialStates[i];
-          contador = 1;
-          asignarEventos();
-        });
-
-        caja.appendChild(addButton);
-        caja.appendChild(resetButton);
-        caja.appendChild(returnButton);
-      }
+    function volverAInicial() {
+      document.querySelector(".caja").innerHTML = initialState; // Restaura el estado inicial
+      contador = 1;
+      document.querySelector(".boton1").addEventListener("click", empezar); // Vuelve a asignar el evento "Start"
     }
 
     function actualizar() {
       document.querySelector(".contador").innerHTML = contador;
-    }
-
-    function asignarEventos() {
-      document.querySelector(".boton2").addEventListener("click", function() {
-        contador++;
-        actualizar();
-      });
-      document.querySelector(".boton3").addEventListener("click", function() {
-        contador = 1;
-        actualizar();
-      });
-      document.querySelector(".boton4").addEventListener("click", function() {
-        caja1.innerHTML = initialStates[0];
-        contador = 1;
-        asignarEventos();
-      });
     }
   </script>
 </body>
