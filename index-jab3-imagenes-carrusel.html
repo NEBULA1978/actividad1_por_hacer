@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript Image Sidebar Carousel</title>
+  <style>
+    .sidebar {
+      width: 200px;
+      height: 400px;
+      overflow: hidden;
+    }
+
+    .sidebar img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <img class="imagen" src="tu_primera_imagen.jpg" alt="Imagen 1">
+  </div>
+
+  <script>
+    const imagenes = [
+      "./haz_una_cascada_y_un_druida_en_el_centro_con_una_hoguera_con_la_luna_llena-9603416e-1b35-40d0-a299-abf9dc03b75c.jpg",
+      "./felicitacion_reyes_godos.png",
+      "./mini1.png"
+    ]; // Coloca aquí las rutas de tus imágenes
+
+    let contador = 0; // Iniciar con la primera imagen
+    const intervaloTiempo = 2000; // Intervalo de cambio en milisegundos (ej. 2000 = 2 segundos)
+
+    function cambiarImagenAutomaticamente() {
+      document.querySelector(".imagen").src = imagenes[contador];
+      contador = (contador + 1) % imagenes.length;
+    }
+
+    // Cambiar imagen inicial
+    cambiarImagenAutomaticamente();
+
+    // Establecer el cambio automático de imagen cada 'intervaloTiempo' milisegundos
+    setInterval(cambiarImagenAutomaticamente, intervaloTiempo);
+  </script>
+</body>
+</html>
