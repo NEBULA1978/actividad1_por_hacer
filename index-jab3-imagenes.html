@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript Counter with Images</title>
+</head>
+<body>
+  <div class="caja">
+    <button class="boton1">Start</button>
+  </div>
+
+  <script>
+    let contador = 1;
+    let initialState; // Variable para almacenar el estado inicial
+
+    document.querySelector(".boton1").addEventListener("click", empezar);
+
+    function empezar() {
+      initialState = document.querySelector(".caja").innerHTML; // Guarda el estado inicial
+
+      document.querySelector(".caja").innerHTML = `
+        <button class="boton2">Add 1</button>
+        <button class="boton3">Reset</button>
+        <button class="boton4">Return to Start</button>
+        <div class="contador">${contador}</div>
+        <img class="imagen" src="./haz_una_cascada_y_un_druida_en_el_centro_con_una_hoguera_con_la_luna_llena-9603416e-1b35-40d0-a299-abf9dc03b75c.jpg" alt="Imagen 1">`;
+
+      actualizar();
+
+      document.querySelector(".boton2").addEventListener("click", incrementar);
+      document.querySelector(".boton3").addEventListener("click", reiniciar);
+      document.querySelector(".boton4").addEventListener("click", volverAInicial);
+    }
+
+    function incrementar() {
+      ++contador;
+      actualizar();
+      cambiarImagen();
+    }
+
+    function reiniciar() {
+      contador = 1;
+      actualizar();
+    }
+
+    function volverAInicial() {
+      document.querySelector(".caja").innerHTML = initialState; // Restaura el estado inicial
+      contador = 1;
+      document.querySelector(".boton1").addEventListener("click", empezar); // Vuelve a asignar el evento "Start"
+    }
+
+    function actualizar() {
+      document.querySelector(".contador").innerHTML = contador;
+    }
+
+    function cambiarImagen() {
+      const imagenes = [
+        "./haz_una_cascada_y_un_druida_en_el_centro_con_una_hoguera_con_la_luna_llena-9603416e-1b35-40d0-a299-abf9dc03b75c.jpg",
+        "./felicitacion_reyes_godos.png",
+        "./mini1.png"
+      ]; // Coloca aquí las rutas de tus imágenes
+      const indice = contador % imagenes.length;
+      document.querySelector(".imagen").src = imagenes[indice];
+    }
+
+        // Estructura HTML: El código HTML define un botón con el texto "Start" dentro de una caja. Se establece un área para mostrar el contador y otra área para mostrar una imagen.
+
+//     Funciones JavaScript:
+//          Esta función se ejecuta cuando se hace clic en el botón "Start". Guarda el estado inicial de la caja y reemplaza su contenido con un conjunto de botones ("Add 1", "Reset" y "Return to Start"), un área para mostrar el contador y un área para mostrar una imagen.
+//         - .Incrementa el contador cada vez quecambiarImagen()para cambiar la imagen que se muestra.
+//          Restablece el contador a 1 cuando se hace clic en el botón "Reset".
+//         de volverAInicial (): Restaura el estado inicial de la caja, incluyendo el contenido original y los eventos iniciales, cuando se hace clic en el botón "Return to Start".
+//          Actualiza el área del contador con el valor actual del contador.
+//         cambiarImagen (): Cambia la imagen mostrada basada en el valor del contador. Utiliza un conjunto de rutas de imágenes y un índice que varía según el valor del contador para mostrar una imagen diferente.
+
+// El código asume que las imágenes están en la misma carpeta que el archivo HTML y usa rutas relativas para mostrar las imágenes. Cada vez que se hace clic en "Add 1", el contador aumenta y la imagen se actualiza de acuerdo con el valor del contador. Además, los otros botones ("Reset" y "Return to Start") tienen funcionalidades para reiniciar el contador y restaurar el estado inicial respectivamente.
+  </script>
+</body>
+</html>
